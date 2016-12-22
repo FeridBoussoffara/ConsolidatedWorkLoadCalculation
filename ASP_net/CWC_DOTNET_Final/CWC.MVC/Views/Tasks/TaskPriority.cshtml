@@ -1,0 +1,90 @@
+﻿@model IEnumerable<CWC.MVC.Models.TasksViewModel>
+
+<p>
+    @Html.ActionLink("Home Tasks", "Index", "", new { @class = "btn btn-primary" })
+
+</p>
+<div class="table-scrollable">
+    <table  class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeadLine)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th style="color:red">
+                    @Html.DisplayNameFor(model => model.Priority)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.NomProject)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.NomEmployee)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeadLine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    @if (item.Priority > 50)
+                {
+                        <td style="color:red">
+                            @Html.DisplayFor(modelItem => item.Priority)
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="color:lawngreen">
+                            @Html.DisplayFor(modelItem => item.Priority)
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomProject)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomEmployee)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.TaskId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+    </div>

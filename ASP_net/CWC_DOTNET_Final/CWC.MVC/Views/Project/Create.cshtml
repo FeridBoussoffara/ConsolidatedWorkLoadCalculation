@@ -1,0 +1,35 @@
+﻿@model CWC.MVC.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Project</h2>
+
+
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Choose Which Type Of Project You Want To Add</h4>
+
+
+
+
+
+
+    <a type="button" href="@Url.Action("Create", "GroupProject")">
+        <input type="button" value="Create Group Project" />
+    </a>
+    <br />
+    <a type="button" href="@Url.Action("Create", "IndividualProject")">
+        <input type="button" value="Create Individual Project" />
+    </a>
+    <br /><br />
+    <div>
+        @Html.ActionLink("Back to Project's List", "Index", "", new { @class = "btn btn-primary" })
+
+    </div>
+</div>
+</div>
+

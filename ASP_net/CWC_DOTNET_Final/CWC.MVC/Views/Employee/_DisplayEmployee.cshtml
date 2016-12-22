@@ -1,0 +1,21 @@
+﻿@model CWC.MVC.Models.RegisterViewModel
+@{string path = "~/Content/Upload/" + @Model.Photo;}
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.UserName)
+        </td>
+        <td>
+            <img alt="Photo de l'employé" src="@Url.Content(path)" width="200" height="200" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.EmployeeType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        </td>
+    </tr>

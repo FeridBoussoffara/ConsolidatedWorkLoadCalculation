@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CWC.MVC.Models.ProjectViewModel>
+
+@{
+    ViewBag.Title = "ProjectInGivenTime";
+}
+
+<h2>ProjectInGivenTime</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Budget)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeProject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in @ViewBag.projet) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @item.StartDate
+        </td>
+        <td>
+            @item.EndDate
+        </td>
+        <td>
+            @item.Budget
+        </td>
+        <td>
+            @item.TypeProject
+        </td>
+
+        <td>
+            @item.Category
+        </td>
+        
+      
+        <td> |
+@Html.ActionLink("Return to Project's list", "Index", "", new { @class = "btn btn-primary" })
+        </td>
+    </tr>
+}
+
+</table>

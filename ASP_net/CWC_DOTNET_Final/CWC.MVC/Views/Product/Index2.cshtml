@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CWC.MVC.Models.ProductModel>
+ 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Products</h2>
+
+
+  <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AddedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+
+        string path = "~/Content/Upload/" + item.Photo;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+
+                <img alt="Produit" src="@Url.Content(path)" width="50" height="50" />
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            
+        </tr>
+    }
+
+    </table> 
+   
+    <!-- END EXAMPLE TABLE PORTLET-->

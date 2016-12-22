@@ -1,0 +1,66 @@
+﻿@model CWC.MVC.Models.TasksViewModel
+
+<div>
+    <h4>Task</h4>
+    <hr />
+
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="portlet yellow-crusta box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i ></i>Task Details
+                </div>
+                
+            </div>
+            <div class="portlet-body">
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.TaskId): </div>
+                    <div class="col-md-7 value">
+                        @Html.DisplayFor(model => model.TaskId)
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.Name): </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.Name) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.DeadLine): </div>
+                    <div class="col-md-7 value">
+                        @Html.DisplayFor(model => model.DeadLine)
+                     
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.StartDate): </div>
+                    <div class="col-md-7 value">@Html.DisplayFor(model => model.StartDate)</div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.EndDate): </div>
+                    <div class="col-md-7 value">@Html.DisplayFor(model => model.EndDate) </div>
+                </div>
+
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.Priority): </div>
+                    <div class="col-md-7 value">
+                        @Html.DisplayFor(model => model.Priority)
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name">@Html.DisplayNameFor(model => model.State): </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.State) </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.NomProject): </div>
+                    <div class="col-md-7 value"> @Html.DisplayFor(model => model.NomProject)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TaskId },  new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-primary" })
+    </p>

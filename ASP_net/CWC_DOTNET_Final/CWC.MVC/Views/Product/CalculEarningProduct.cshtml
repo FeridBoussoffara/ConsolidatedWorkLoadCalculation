@@ -1,0 +1,30 @@
+﻿@model CWC.MVC.Models.EarningModel
+@{
+    ViewBag.Title = "CalculEarningProduct";
+}
+
+<h2>CalculEarningProduct</h2>
+<label>Product : @ViewBag.nameProduct </label></br>
+<label>Month : @ViewBag.month </label></br>
+<label>Earning : @ViewBag.Cal </label>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group"> 
+            <div class="col-md-10">
+                @Html.DropDownListFor(model=>model.monthNum, Model.months , "-- -- Please Select -- --") 
+                @Html.ValidationMessageFor(model => model.monthNum, "", new { @class = "text-danger" })
+
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Calculate" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

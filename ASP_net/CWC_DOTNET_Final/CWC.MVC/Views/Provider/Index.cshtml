@@ -1,0 +1,125 @@
+﻿@model IEnumerable<CWC.MVC.Models.ProviderModels>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@*@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                <div>
+                    Search by region : @Html.TextBox("searchString")
+                </div>
+            </td>
+            <td>
+                <input type="submit" value="Search" id="submit" />
+            </td>
+        </tr>
+    </table>
+}*@
+<style>
+a.my-class { color: #5fba7d }
+a.my-class:active { color: #5fba7d }
+a.my-class:link { color: #5fba7d }
+a.my-class:visited { color: #5fba7d }
+
+</style>
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-dark">
+            <i class="icon-settings font-dark"></i>
+            <span class="caption-subject bold uppercase">List Providers</span>
+        </div>
+        <div class="actions">
+            <div class="btn-group btn-group-devided" data-toggle="buttons">
+
+
+            </div>
+        </div>
+    </div>
+    <p>
+        <button id="sample_editable_1_new" class="btn sbold green" onclick="location.href='@Url.Action("Create", "Provider")';return false;" />
+        Add New
+        <i class="fa fa-plus"></i>
+        </button>
+    </p>
+    @{int rowNo = 0;}
+    <p>
+        @Html.ActionLink("Most Requested", "MostProvider")
+    </p>
+
+    <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="mytable">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumTel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Adresse)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="gradeX odd" role="row">
+                    <td>
+                        @(rowNo += 1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumTel)
+                    </td>
+                    <td>
+                        <a href="@Html.DisplayFor(modelItem => item.Email)"> @Html.DisplayFor(modelItem => item.Email) </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adresse)
+                    </td>
+                    <td>
+                        @Html.Partial("_DisplayProvider", item)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProviderId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProviderId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProviderId }) |
+                        @Html.ActionLink("List Product Ordered", "GetOrderedProductProvider", new { id = item.ProviderId }, new { @class = "my-class" }) |
+                        @Html.ActionLink("Profile", "ProfileProvider", new { id = item.ProviderId })
+
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <center>
+        <img src="~/Content/img/map.png" style="width:64px; height:64px;" /> @Html.ActionLink("Map Providers", "MapProviderRegion")
+    </center>
+    <script type="text/javascript" charset="utf8">
+        $(document).ready( function () {
+            $('#mytable').DataTable();
+        } );
+    </script>

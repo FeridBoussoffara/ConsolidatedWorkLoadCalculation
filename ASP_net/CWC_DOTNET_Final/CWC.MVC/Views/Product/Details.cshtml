@@ -1,0 +1,205 @@
+﻿@model CWC.MVC.Models.ProductModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductModel</h4><a href="@Url.Action("ExportPDF","Product", new { id = Model.Id })" >Export PDF</a>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt> 
+        <dd>
+            <img alt="Produit" src="@Url.Content("~/Content/Upload/"+Model.Photo)" width="50" height="50" />
+        </dd>
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt class="Elec">
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd class="Elec">
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt class="Furn">
+            @Html.DisplayNameFor(model => model.Material)
+        </dt>
+
+        <dd class="Furn">
+            @Html.DisplayFor(model => model.Material)
+        </dd>
+
+        <dt class="Veh">
+            @Html.DisplayNameFor(model => model.WheelsNbr)
+        </dt>
+
+        <dd class="Veh">
+            @Html.DisplayFor(model => model.WheelsNbr)
+        </dd>
+
+        <dt class="Veh">
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+
+        <dd class="Veh">
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+
+        <dt class="Veh">
+            @Html.DisplayNameFor(model => model.VehiculeType)
+        </dt>
+
+        <dd class="Veh">
+            @Html.DisplayFor(model => model.VehiculeType)
+        </dd>
+
+        <dt class="Veh">
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+
+        <dd class="Veh">
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+
+        <dt class="Agri">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd class="Agri">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt class="Tech">
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+
+        <dd class="Tech">
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+
+        <dt class="Tech">
+            @Html.DisplayNameFor(model => model.Technology)
+        </dt>
+
+        <dd class="Tech">
+            @Html.DisplayFor(model => model.Technology)
+        </dd>
+
+        <dt  class="Agri">
+            @Html.DisplayNameFor(model => model.ValidityDate)
+        </dt>
+
+        <dd class="Agri">
+            @Html.DisplayFor(model => model.ValidityDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddedDate)
+        </dd>
+
+        <dt  class="Agri">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd  class="Agri">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@Scripts.Render("~/jquery/CWC/js")
+<script type="text/javascript" language="javascript">
+
+     $(document).ready(function () {
+        $(".Elec").hide();
+        $(".Furn").hide();
+        $(".Agri").hide();
+        $(".Tech").hide();
+        $(".Veh").hide();
+
+        var value = "@ViewBag.Type";  
+            if (value == "Agriculture")
+            {
+                $(".Agri").show();
+                $(".Elec").hide();
+                $(".Furn").hide();
+                $(".Tech").hide();
+                $(".Veh").hide();
+            }
+           else if (value == "Vehicule") {
+                $(".Veh").show();
+                $(".Elec").hide();
+                $(".Furn").hide();
+                $(".Agri").hide();
+                $(".Tech").hide();
+            }
+            else if (value == "Software") {
+                $(".Tech").show();
+                $(".Elec").hide();
+                $(".Furn").hide();
+                $(".Agri").hide();
+                $(".Veh").hide();
+            }
+           else if (value == "Electronic") {
+                $(".Elec").show();
+                $(".Furn").hide();
+                $(".Agri").hide();
+                $(".Tech").hide();
+                $(".Veh").hide();
+            }
+            else if (value == "Furniture") {
+                $(".Furn").show();
+                $(".Elec").hide();
+                $(".Agri").hide();
+                $(".Tech").hide();
+                $(".Veh").hide();
+            }
+            else {
+                $(".Elec").hide();
+                $(".Furn").hide();
+                $(".Agri").hide();
+                $(".Tech").hide();
+                $(".Veh").hide();
+            }
+
+            //alert($('option:selected', $(this)).text());
+        });
+    
+</script>

@@ -1,0 +1,39 @@
+﻿@model CWC.MVC.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Progress";
+}
+
+<h2>Progress of this Project</h2>
+
+
+<dt>
+    Project Task
+</dt>
+
+            @foreach (var item in @ViewBag.all)
+            {
+            <dd>
+                @item.Name
+            </dd>
+            }
+<dt>
+    Done Tasks
+</dt>
+@foreach(var it in @ViewBag.done)
+{
+    <dd>
+        @it.Name
+    </dd>
+}
+<dt>
+    Progress
+</dt>
+<dd>
+    @ViewBag.pourcentage %
+   
+</dd>
+<td>
+    @Html.ActionLink("Back to Project's List", "Index","", new { @class = "btn btn-primary" })
+
+</td>

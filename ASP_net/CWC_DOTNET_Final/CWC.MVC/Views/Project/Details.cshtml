@@ -1,0 +1,134 @@
+﻿@model CWC.MVC.Models.ProjectViewModel
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+ 
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProjectViewModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="portlet yellow-crusta box">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i></i>Project Details
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.ProjectId): </div>
+                        <div class="col-md-7 value">
+                            @Html.DisplayFor(model => model.ProjectId)
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.Name): </div>
+                            <div class="col-md-7 value">
+                                @Html.DisplayFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.StartDate): </div>
+                            <div class="col-md-7 value">
+                                @Html.DisplayFor(model => model.StartDate)
+                            </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.EndDate): </div>
+                            <div class="col-md-7 value">
+                                @Html.DisplayFor(model => model.EndDate)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.Budget): </div>
+                        <div class="col-md-7 value">
+                            @Html.DisplayFor(model => model.Budget)
+                        </div>
+                    </div>
+
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.Category): </div>
+                        <div class="col-md-7 value">
+                            @Html.DisplayFor(model => model.Category)
+                        </div>
+                    </div>
+
+
+
+                    @if (@ViewBag.Type == 1)
+                    {
+
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Team Leader: </div>
+                            <div class="col-md-7 value">
+                                @ViewBag.Group.TeamLeader.FirstName
+                            </div>
+
+                        </div>
+
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Employees List: </div>
+                            @foreach (var item in @ViewBag.Liste)
+                            {
+
+                                <div class="col-md-7 value">
+                                    @item.FirstName
+                                </div>
+
+                            }
+                        </div>
+                    }
+
+                    @if (@ViewBag.Type == 0)
+                    {
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Single Employee: </div>
+                            <div class="col-md-7 value">
+                                @ViewBag.Group.TeamLeader.FirstName
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }, new { @class = "btn btn-primary" })|
+        @Html.ActionLink("Progress", "Progress", new { id = Model.ProjectId }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Assign", "AssignEmployee", new { id = Model.ProjectId }, new { @class = "btn btn-primary" })|
+        @Html.ActionLink("Back to Project's List", "Index", "", new { @class = "btn btn-primary" })
+        @{
+            var url = "https://www.facebook.com/sharer/sharer.php?u=";
+            var url2 = "http://localhost.com/Project/Details/" + Model.ProjectId;
+        }
+
+
+    </p>
+
+    <div>
+        <div class="fb-comments" data-href="@url2" data-numposts="50"></div>
+        <div class="fb-like" data-href="@url2" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    </div>
+</div>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="@url2" data-text="Consulter ce projet" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

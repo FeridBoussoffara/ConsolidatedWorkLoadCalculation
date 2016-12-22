@@ -1,0 +1,116 @@
+﻿@model IEnumerable<CWC.MVC.Models.ProductModels>
+
+@{
+    ViewBag.Title = "List Ordered Product From Provider ";
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<h1 class="page-title">
+    @ViewBag.Title 
+    <small><font color="#5fba7d">@ViewBag.Name</font> </small>
+</h1>
+<link href="~/Content/css/countrySelect.min.css" rel="stylesheet" />
+@using (Html.BeginForm("ProductForSpecificProviderRegion", "Provider", FormMethod.Get))
+    {
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        Search by region : <input type="text" name="country" data-required="1" class="form-control" id="country">
+                    </div>
+                </td>
+                <td>
+                    <button class="btn green-haze" type="submit">Go!</button>
+                </td>
+            </tr>
+        </table>
+    }
+</br>
+@*@{int rowNo = 0;}
+<table class="table">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @(rowNo += 1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price) $
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+    </tr>
+}
+
+</table>*@
+
+@foreach (var item in Model)
+{
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="portlet light portlet-fit bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class=" icon-layers font-green"></i>
+                <span class="caption-subject font-green bold uppercase">@Html.DisplayFor(modelItem => item.Name)</span>
+                <div class="caption-desc font-grey-cascade"> Quantity : @Html.DisplayFor(modelItem => item.Quantity)<br />Price : @Html.DisplayFor(modelItem => item.Price) $</div>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="mt-element-overlay">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mt-overlay-1">
+                            @{string path = "~/Content/Upload/" + @item.Photo;}
+                            <img src="@Url.Content(path)" >
+                            <div class="mt-overlay">
+                                <ul class="mt-info">
+                                    <li>
+                                        <a class="btn default btn-outline" href="javascript:;">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn default btn-outline" href="javascript:;">
+                                            <i class="icon-link"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/Content/js/countrySelect.min.js"></script>
+<script>
+  $("#country").countrySelect();
+</script>
+
+ 
+

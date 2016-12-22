@@ -1,0 +1,110 @@
+﻿@model CWC.MVC.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{string path = "~/Content/Upload/" + @Model.Photo;}
+@Scripts.Render("~/Script&Content/CWC/js")
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="portlet yellow-crusta box">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i></i>TeamLeader Details
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.Email): </div>
+                        <div class="col-md-7 value">
+                            @Html.DisplayFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.CIN): </div>
+                        <div class="col-md-7 value"> @Html.DisplayFor(model => model.CIN) </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.FirstName): </div>
+                        <div class="col-md-7 value">
+                            @Html.DisplayFor(model => model.FirstName)
+
+                        </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.LastName): </div>
+                        <div class="col-md-7 value">@Html.DisplayFor(model => model.LastName)</div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.HireDate): </div>
+                        <div class="col-md-7 value">@Html.DisplayFor(model => model.HireDate) </div>
+                    </div>
+
+                    <div class="row static-info">
+                        <img alt="Photo de l'employé" src="@Url.Content(path)" width="200" height="200" />
+
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name">@Html.DisplayNameFor(model => model.Adresse) </div>
+                        <div class="col-md-7 value"> @Html.DisplayFor(model => model.Adresse) </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-5 name"> @Html.DisplayNameFor(model => model.UserName): </div>
+                        <div class="col-md-7 value"> @Html.DisplayFor(model => model.UserName)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+
+    AmCharts.makeChart("chartdiv",
+{
+	"type": "radar",
+	"categoryField": "ProjectName",
+	"startDuration": 2,
+	"graphs": [
+		{
+			"balloonText": "[[value]] $ overall",
+			"bullet": "round",
+			"id": "AmGraph-1",
+			"valueField": "Budget"
+		}
+	],
+	"guides": [],
+	"valueAxes": [
+		{
+			"axisTitleOffset": 20,
+			"id": "ValueAxis-1",
+			"minimum": 0,
+			"axisAlpha": 0.15,
+			"dashLength": 3
+		}
+	],
+	"allLabels": [],
+	"balloon": {},
+	"titles": [],
+	"dataProvider": @Html.Raw(Json.Encode(ViewBag.PBs))
+	
+});
+
+
+
+
+</script>
+
+
+<div class="portlet-body">
+    <div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

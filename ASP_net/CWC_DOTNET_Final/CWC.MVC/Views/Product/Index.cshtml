@@ -1,0 +1,263 @@
+﻿@model IEnumerable<CWC.MVC.Models.ProductModel>
+ 
+@{
+    ViewBag.Title = "Index";
+}
+  
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-green-sharp">
+                        <span data-counter="counterup" data-value="@ViewBag.gain"> @ViewBag.gain</span>
+                        <small class="font-green-sharp">$</small>
+                    </h3>
+                    <small>TOTAL GAIN</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-pie-chart"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: @ViewBag.percentGain%;" class="progress-bar progress-bar-success green-sharp">
+                        <span class="sr-only">@ViewBag.percentGain % progress</span>
+                    </span>
+                </div>
+                <div class="status">
+                    <div class="status-title"> progress </div>
+                    <div class="status-number"> @ViewBag.percentGain % </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-red-haze">
+                        <span data-counter="counterup" data-value="@ViewBag.restQuant">@ViewBag.restQuant</span>
+                    </h3>
+                    <small>STOCK'S REST</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-like"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: @ViewBag.percentRest%;" class="progress-bar progress-bar-success red-haze">
+                        <span class="sr-only">@ViewBag.percentRest % change</span>
+                    </span>
+                </div>
+                <div class="status">
+                    <div class="status-title"> change </div>
+                    <div class="status-number"> @ViewBag.percentRest % </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-blue-sharp">
+                        <span data-counter="counterup" data-value="@ViewBag.nbCust">@ViewBag.nbCust</span>
+                    </h3>
+                    <small>CUSTOMERS'NUMBER</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-basket"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: @ViewBag.activity%;" class="progress-bar progress-bar-success blue-sharp">
+                        <span class="sr-only">@ViewBag.activity % grow</span>
+                    </span>
+                </div>
+                <div class="status">
+                    <div class="status-title"> Customers'Activity  </div>
+                    <div class="status-number"> @ViewBag.activity % </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-purple-soft">
+                        <span data-counter="counterup" data-value="@ViewBag.nbOrders">@ViewBag.nbOrders</span>
+                    </h3>
+                    <small>ORDERS'NUMBER</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-user"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: @ViewBag.nbOrders%;" class="progress-bar progress-bar-success purple-soft">
+                        <span class="sr-only">@ViewBag.nbOrders % change</span>
+                    </span>
+                </div>
+                <div class="status">
+                    <div class="status-title"> change </div>
+                    <div class="status-number"> @ViewBag.nbOrders% </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Part of Data table-->
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-dark">
+                        <i class="icon-settings font-dark"></i>
+                        <span class="caption-subject bold uppercase"> List Of Products</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <button id="sample_editable_1_new" class="btn sbold green">
+                                        @Html.ActionLink("Add New", "Create")
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                    <button id="sample_editable_1_new" class="btn sbold green">
+                                        @Html.ActionLink("VIEW STATISTIQUE BY QUANTITY", "StatisticProducts")
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="btn-group pull-right">
+
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="javascript:;">
+                                                <i class="fa fa-print"></i> Print
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("ExportPDFList","Product")">
+                                                <i class="fa fa-file-pdf-o"></i> Save as PDF
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <i class="fa fa-file-excel-o"></i> Export to Excel
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Photo)
+                                </th>
+                                <th> @Html.DisplayNameFor(model => model.Name)  </th>
+                                <th> @Html.DisplayNameFor(model => model.Price) </th>
+
+                                <th> @Html.DisplayNameFor(model => model.Quantity) </th>
+                                <th> @Html.DisplayNameFor(model => model.Type) </th>
+                                <th> Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                string path = "~/Content/Upload/" + item.Photo;
+
+                                <tr class="odd gradeX">
+                                    <td>
+                                        <img alt="Produit" src="@Url.Content(path)" width="50" height="50" />
+                                    </td>
+                                    <td> @Html.DisplayFor(modelItem => item.Name) </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td class="center">
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+
+                                        @if (item.Quantity > 1000)
+                                        { <span class="label label-sm label-success"> Available </span> }
+                                        @if (item.Quantity < 1000 && item.Quantity > 100)
+                                        { <span class="label label-sm label-warning"> Attention </span> }
+
+                                        @if (item.Quantity < 100 && item.Quantity > 0)
+                                        { <span class="label label-sm label-danger"> Limited </span> }
+                                        @if (item.Quantity == 0)
+                                        { <span class="label label-sm label-danger"> NotAvailable </span> }
+
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+
+
+
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-left" role="menu">
+                                                <li>
+
+                                                    <i class="fa fa-pencil-square-o">&nbsp;&nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.Id })  </i>
+
+                                                </li>
+                                                <li>
+
+                                                    <i class="fa fa-info">&nbsp;&nbsp;@Html.ActionLink("Details", "Details", new { id = item.Id }) </i>
+
+                                                </li>
+                                                <li>
+
+                                                    <i class="fa fa-money">&nbsp;&nbsp;@Html.ActionLink("Earning", "CalculEarningProduct", new { id = item.Id }) </i>
+                                                </li>
+                                                <li> <i class="fa fa-trash" >&nbsp;&nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.Id })</i></li>
+                                                <li>
+
+                                                    <i class="fa fa-users" style="width: 147px;" >&nbsp;&nbsp;@Html.ActionLink("ViewCustomers", "ListCutomerByProduct", new { id = item.Id }) <span class="badge badge-success">@item.nbrCustomers</span></i>
+
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+    </div>
+<!--END Part of Data table-->
+<a href="@Url.Action("ExportPDFList","Product")"> Export PDF</a>
+    <!-- END EXAMPLE TABLE PORTLET-->

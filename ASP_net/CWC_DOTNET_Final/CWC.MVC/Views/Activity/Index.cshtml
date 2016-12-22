@@ -1,0 +1,21 @@
+﻿@model IEnumerable<CWC.MVC.Models.ActivityViewModel>
+
+@{
+    ViewBag.Title = "Films";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        @Html.Partial("_DisplayActivity", item);
+    }
+}
+
+
