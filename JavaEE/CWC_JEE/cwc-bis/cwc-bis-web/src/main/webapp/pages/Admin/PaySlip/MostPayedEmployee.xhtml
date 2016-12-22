@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>Most Payed Employee</h1>
+		<hr />
+
+		<h:form id="mostpayedemp">
+
+			<f:facet name="header">
+				<h:outputText value="Most Payed Employee" />
+			</f:facet>
+			<p:column headerText="#">
+				<h:outputText
+					value="#{statPaySlipEmp.mostpayedemployee.firstName} #{statPaySlipEmp.mostpayedemployee.lastName}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{statPaySlipEmp.mostpayedemployee.email}" />
+			</p:column>
+			<p:column headerText="Hire Date">
+				<h:outputText value="#{statPaySlipEmp.mostpayedemployee.hireDate}" />
+			</p:column>
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

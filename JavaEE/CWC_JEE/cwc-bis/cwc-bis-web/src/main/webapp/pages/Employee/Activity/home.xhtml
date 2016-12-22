@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	
+	<ui:define name="content">
+		
+		<h1>Activity List</h1>
+	
+		<hr />
+		
+		<h:form id="activities" rendered="#{activityEmployeBean.displayForm1}">
+		
+		<p:dataTable emptyMessage="No Activities" paginator="true"
+				paginatorPosition="bottom" rows="10" value="#{activityEmployeBean.activities}"
+				var="e">
+				
+				<f:facet name="header">
+					<h:outputText value="Activities List" />
+				</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="#{e.name}" />
+				</p:column>
+				<p:column headerText="Type">
+					<h:outputText value="#{e.type}" />
+				</p:column>
+				
+				<p:column headerText="State">
+					<h:outputText value="#{e.state}" />
+				</p:column>
+			
+			<p:column headerText="Trainer">
+					<h:outputText value="#{e.aspnetuser.firstName},#{e.aspnetuser.lastName}" />
+				</p:column>
+				<p:column headerText="Mean Rating given by participants">
+					<h:outputText value="#{activityBean.GetMeanRating(e.activityId)}" />
+				</p:column>
+				<p:column headerText="Rate">
+				<p:commandButton action="#{activityEmployeBean.rateActivity()}"
+					icon="ui-icon-star"	 ajax="false" value="Rate">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{activityEmployeBean.selectedactivity}"></f:setPropertyActionListener>
+					</p:commandButton>
+					
+					</p:column>
+			</p:dataTable>
+				
+					
+		</h:form>
+		
+		
+		
+		
+		
+		<h:form id="f2" rendered="#{activityEmployeBean.displayForm2}">
+		<p:panel id="panel" header="Activity" style="margin-bottom:10px;">
+			<h:panelGrid columns="2">
+				<h:outputText value="name: " style="font-weight:bold" />
+				<h:outputText value="#{activityEmployeBean.selectedactivity.name}" />
+				<h:outputText value="State: " style="font-weight:bold" />
+				<h:outputText value="#{activityEmployeBean.selectedactivity.state}" />
+				<h:outputText value="Type: " style="font-weight:bold" />
+				<h:outputText value="#{activityEmployeBean.selectedactivity.type}" />
+				<h:outputText value="Rating: " style="font-weight:bold"/>
+				<h:inputText value="#{activityEmployeBean.rating}" /> 
+				<p:commandButton action="#{activityEmployeBean.doRateActivity()}"
+					value="Rate" ajax="false"  icon="ui-icon-circle-check" />
+			<p:commandButton action="#{activityEmployeBean.cancel()}"
+					value="cancel" ajax="false" icon="ui-icon-circle-arrow-w" />
+			
+			</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+		
+
+	</ui:define>
+
+
+</ui:composition>

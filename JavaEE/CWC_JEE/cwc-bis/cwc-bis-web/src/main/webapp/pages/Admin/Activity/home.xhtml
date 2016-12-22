@@ -1,0 +1,199 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	
+	<ui:define name="content">
+		
+		<h1>Activity List</h1>
+	
+		<hr />
+		
+		<b>Best Rated Activity: </b><h:outputText value="#{activityBean.GetBestActivity().name}" />
+		<br/>
+		<b>Best Rated Trainer: </b><h:outputText value="#{activityBean.GetBestActivity().aspnetuser.firstName},#{activityBean.GetBestActivity().aspnetuser.lastName}" />
+		<hr />
+	
+		<h:form id="activities" rendered="#{activityBean.displayForm1}">
+		   <h:commandLink>
+      <h:graphicImage library="assets/global/img" name="excel-icon.png" />
+        <p:dataExporter type="xls" target="MYact" fileName="Activities" pageOnly="true"/>
+    </h:commandLink>
+		<p:commandButton action="#{activityBean.selectActivity()}"
+					icon="ui-icon-circle-plus"	value="New" ajax="false" />
+		<p:dataTable 
+				emptyMessage="No Activities" 
+				paginator="true"
+				paginatorPosition="bottom" 
+				rows="10" value="#{activityBean.activities}"
+				id ="MYact" 
+				var="e" 
+			>
+				
+				<f:facet name="header">
+					<h:outputText value="Activities List" />
+				</f:facet>
+				
+				
+				<p:column headerText="Name" filterBy="#{e.name}" filterMatchMode="startsWith">
+					<h:outputText value="#{e.name}" />
+				</p:column>
+				<p:column headerText="Type" filterBy="#{e.type}" filterMatchMode="startsWith">
+					<h:outputText value="#{e.type}" />
+				</p:column>
+				
+				<p:column headerText="State">
+					<h:outputText value="#{e.state}" />
+				</p:column>
+			
+			<p:column headerText="Trainer" filterBy="#{e.aspnetuser.firstName},#{e.aspnetuser.lastName}" filterMatchMode="exact" filterOptions="#{activityBean.filter}">
+					<h:outputText value="#{e.aspnetuser.firstName},#{e.aspnetuser.lastName}" />
+				</p:column>
+				<p:column headerText="Mean Rating given by participants">
+					<h:outputText value="#{activityBean.GetMeanRating(e.activityId)}" />
+				</p:column>
+				
+				<p:column headerText="Edit/Delete" exportable="false">
+				<h:commandButton action="#{activityBean.selectActivity()}"
+						value="select">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{activityBean.selectedactivity}"></f:setPropertyActionListener>
+					</h:commandButton>
+					
+					</p:column>
+					
+						<p:column headerText="Add participants" exportable="false">
+				<h:commandButton action="#{activityBean.SubscribeEmployeeActivity()}"
+						value="subscribe employee">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{activityBean.selectedactivity}"></f:setPropertyActionListener>
+					</h:commandButton>
+					</p:column>
+					
+							<p:column headerText="Participants" exportable="false">
+				<h:commandButton action="#{activityBean.checkEmployees()}"
+						value="check employees">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{activityBean.selectedactivity}"></f:setPropertyActionListener>
+					</h:commandButton>
+					</p:column>
+			</p:dataTable>
+					   <h:commandLink>
+      <h:graphicImage library="/assets/apps/global/img" name="excel-icon.png" />
+        <p:dataExporter type="xls" target="MYact" fileName="Activities" pageOnly="true"/>
+    </h:commandLink>	
+			
+		</h:form>
+		
+		<h:form id="f2" rendered="#{activityBean.displayForm2}" > 
+		  <p:panel id="details" header="Activity" style="margin-bottom:10px;" visible="#{activityBean.displayForm2}">
+			<h:panelGrid columns="2">
+				<h:outputText value="name" style="font-weight:bold" />
+				<h:inputText value="#{activityBean.selectedactivity.name}"   />
+				<h:outputText value="State" style="font-weight:bold" />
+				<h:inputText value="#{activityBean.selectedactivity.state}"  > 
+			
+				</h:inputText>
+				<h:outputText value="Type" style="font-weight:bold"/>
+				<h:inputText value="#{activityBean.selectedactivity.type}" />
+				<h:selectOneMenu value="#{activityBean.selectedTrainerId}">
+				<h:outputText value="Trainor" style="font-weight:bold" />
+				<f:selectItem itemValue="-1" itemLabel="Please select a trainor" />
+				<f:selectItems value="#{activityBean.selectTrainer}"/>
+				</h:selectOneMenu><br />
+				
+				
+				<p:commandButton action="#{activityBean.doAddActivity()}"
+					value="save or update"  ajax="false" icon="ui-icon-circle-check"/>
+					<p:commandButton actionListener="#{activityBean.doDeleteActivity()}"
+					value="delete" update=":activities" rendered="#{activityBean.selectedactivity.activityId != 0}" ajax="false" icon="	ui-icon-circle-close"/>
+				<p:commandButton action="#{activityBean.cancel}" ajax="false" icon="ui-icon-circle-arrow-w"
+					value="cancel" />
+			
+			</h:panelGrid>
+			  </p:panel>
+		</h:form>
+	
+		
+		
+		<h:form id="f3" rendered="#{activityBean.displayForm3}">
+		<p:panel id="panel" header="Activity" style="margin-bottom:10px;">
+			<h:panelGrid columns="2">
+				<h:outputText value="name: " style="font-weight:bold" />
+				<h:outputText value="#{activityBean.selectedactivity.name}" />
+				<h:outputText value="State: "  style="font-weight:bold"/>
+				<h:outputText value="#{activityBean.selectedactivity.state}" />
+				<h:outputText value="Type: " style="font-weight:bold" />
+				<h:outputText value="#{activityBean.selectedactivity.type}" />
+				<h:selectOneMenu value="#{activityBean.selectedTrainerId}">
+				<h:outputText value="Employee" style="font-weight:bold"/>
+				<f:selectItem itemValue="-1" itemLabel="Please select an employee" />
+				<f:selectItems value="#{activityBean.selectTrainer}"/>
+				</h:selectOneMenu><br />
+					
+				
+				<p:commandButton action="#{activityBean.doSubscribeEmployeeActivity()}"
+					value="subscribe this employee" ajax="false" icon="ui-icon-circle-check" />
+				<p:commandButton action="#{activityBean.cancel2()}"
+					value="cancel" ajax="false" icon="ui-icon-circle-arrow-w"/>
+			
+			</h:panelGrid>
+			</p:panel>
+		</h:form>
+		<h:form id="f4" rendered="#{activityBean.displayForm4}">
+		<b>Total number of employees in our company: </b><h:outputText value="#{activityBean.totalEmployees}" />
+		<hr />
+			<p:panel id="panel" header="Activity" style="margin-bottom:10px;">
+			<h:panelGrid columns="2">
+				<h:outputText value="name: " style="font-weight:bold"/>
+				<h:outputText value="#{activityBean.selectedactivity.name}" />
+				<h:outputText value="State: " style="font-weight:bold"/>
+				<h:outputText value="#{activityBean.selectedactivity.state}" />
+				<h:outputText value="Type: " style="font-weight:bold"/>
+				<h:outputText value="#{activityBean.selectedactivity.type}" />
+				</h:panelGrid>
+					</p:panel>
+				<br />
+					<p:dataTable emptyMessage="No Employees" paginator="true"
+				paginatorPosition="bottom" rows="10" value="#{activityBean.employees}"
+				var="p">
+				
+				<f:facet name="header">
+					<h:outputText value="Employees List" />
+				</f:facet>
+				<p:column headerText="FirstName">
+					<h:outputText value="#{p.firstName}" />
+				</p:column>
+				<p:column headerText="LastName">
+					<h:outputText value="#{p.lastName}" />
+				</p:column>
+				
+				<p:column headerText="CIN">
+					<h:outputText value="#{p.cin}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{p.email}" />
+				</p:column>
+			
+				<p:column headerText="Phone Number">
+					<h:outputText value="#{p.phoneNumber}" />
+				</p:column>
+			</p:dataTable>
+				
+			
+				<p:commandButton action="#{activityBean.back()}"
+					value="Back to List" ajax="false"  icon="ui-icon-circle-arrow-w"/>
+			
+		
+		</h:form>
+		
+
+	</ui:define>
+
+
+</ui:composition>
