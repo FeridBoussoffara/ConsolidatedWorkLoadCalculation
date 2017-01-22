@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>Our Active Customers</h1>
+		<br />
+		<br />
+		<br />
+		<h:form>
+			<h:outputLabel for="month" value="Month: *" />
+			<h:selectOneMenu id="month" value="#{customerBean.monthSelected}"
+				required="true" label="month">
+				<f:selectItem itemLabel="Select One" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="Janury  " itemValue="1" />
+				<f:selectItem itemLabel="Febrary " itemValue="2" />
+				<f:selectItem itemLabel="March  " itemValue="3" />
+				<f:selectItem itemLabel="April  " itemValue="4" />
+				<f:selectItem itemLabel="May  " itemValue="5" />
+				<f:selectItem itemLabel="Juin  " itemValue="6" />
+				<f:selectItem itemLabel="July  " itemValue="7" />
+				<f:selectItem itemLabel="August  " itemValue="8" />
+				<f:selectItem itemLabel="September  " itemValue="9" />
+				<f:selectItem itemLabel="October " itemValue="10" />
+				<f:selectItem itemLabel="November  " itemValue="11" />
+				<f:selectItem itemLabel="December  " itemValue="12" />
+
+
+			</h:selectOneMenu>
+			<h:outputLabel for="Year" value=" Year *:" />
+			<h:selectOneMenu id="year" value="#{customerBean.yearSelected}"
+				required="true" label="year">
+				<f:selectItem itemLabel="Select One" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="#{customerBean.yearDate-2}"
+					itemValue="#{customerBean.yearDate-2}" />
+
+				<f:selectItem itemLabel="#{customerBean.yearDate-1}"
+					itemValue="#{customerBean.yearDate-1}" />
+				<f:selectItem itemLabel="#{customerBean.yearDate}"
+					itemValue="#{customerBean.yearDate}" />
+
+
+
+			</h:selectOneMenu>
+
+
+
+			<br />
+			<br />
+			<p:message for="month" />
+			<p:commandButton value="Update Active Customer" action="#{customerBean.doUpdateActiveCustomer()}"></p:commandButton>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

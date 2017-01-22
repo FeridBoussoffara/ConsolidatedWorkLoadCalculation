@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>Most Absent Employee</h1>
+		<h:form id="absentemployee">
+			
+			
+			<p:panelGrid columns="2" style="margin: 0 auto;">
+				<f:facet name="header">
+					
+				</f:facet>
+
+				
+				<h:outputText value="First Name" />
+				<h:outputText value="#{leaveBean.selectedEmployee.firstName}" />
+
+                <h:outputText value="Last Name" />
+				<h:outputText value="#{leaveBean.selectedEmployee.lastName}" />
+
+				<h:outputText value="Email" />
+				<h:outputText value="#{leaveBean.selectedEmployee.email}" />
+
+				<h:outputText value="Adresse" />
+				<h:outputText value="#{leaveBean.selectedEmployee.adresse}" />
+				
+				
+				
+			</p:panelGrid>
+			
+			
+			
+
+		</h:form>
+			
+		<h:form id="leaves">
+			<p:dataTable emptyMessage="No Leaves" paginator="true"
+				paginatorPosition="bottom" rows="4" value="#{leaveBean.leaves}"
+				var="l">
+				<f:facet name="header">
+					<h:outputText value="list of Leaves For this Employees" />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{l.leaveId}" />
+				</p:column>
+				<p:column headerText="Category">
+					<h:outputText value="#{l.category}" />
+				</p:column>
+				<p:column headerText="Employee">
+					<h:outputText value="#{l.aspnetuser.firstName}" />
+				</p:column>
+				<p:column headerText="Start Date">
+					<h:outputText value="#{l.startDate}" />
+				</p:column>
+				<p:column headerText="End Date">
+					<h:outputText value="#{l.endDate}" />
+				</p:column>
+				
+			</p:dataTable>
+			<h:commandButton value="List"
+				action="#{leaveBean.ReturnListLeave()}" />
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

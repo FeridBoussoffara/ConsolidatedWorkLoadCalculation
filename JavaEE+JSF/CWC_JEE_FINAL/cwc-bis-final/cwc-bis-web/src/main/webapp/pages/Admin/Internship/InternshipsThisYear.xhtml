@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>Internships Of This Year</h1>
+			
+		<h:form id="internshipsthisyear">	
+			<p:dataTable emptyMessage="No Internship" paginator="true"
+				paginatorPosition="bottom" rows="4" value="#{internshipBean.internships}"
+				var="i">
+				<f:facet name="header">
+					<h:outputText value="Internships Of This Year" />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{i.internshipId}" />
+				</p:column>
+				<p:column headerText="Type">
+					<h:outputText value="#{i.type}" />
+				</p:column>
+				<p:column headerText="Poste">
+					<h:outputText value="#{i.poste}" />
+				</p:column>
+				<p:column headerText="Start Date">
+					<h:outputText value="#{i.startDate}" />
+				</p:column>
+				<p:column headerText="End Date">
+					<h:outputText value="#{i.endDate}" />
+				</p:column>
+				<p:column headerText="Status">
+					<h:outputText value="#{i.status}" />
+				</p:column>
+				<p:column headerText="Rate">
+					<h:outputText value="#{i.rate}" />
+				</p:column>
+				
+				</p:dataTable>
+				<h:commandButton value="List"
+				action="#{internshipBean.ReturnList()}" />
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

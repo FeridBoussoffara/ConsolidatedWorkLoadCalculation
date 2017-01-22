@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+
+		<h:form role="form" action="#">
+			<div class="form-group">
+				<p:outputLabel class="control-label">Name :</p:outputLabel>
+				<p:inputText type="text" placeholder="John" class="form-control"
+					value="#{erpAppBean.erpapp.name}"></p:inputText>
+			</div>
+			<div class="form-group">
+				<p:outputLabel class="control-label">Fonder :</p:outputLabel>
+				<p:inputText type="text" placeholder="Doe" class="form-control"
+					value="#{erpAppBean.erpapp.fonder}"></p:inputText>
+			</div>
+			<div class="form-group">
+				<p:outputLabel class="control-label">Logo :</p:outputLabel>
+				<p:inputText type="text" placeholder="+1 646 580 DEMO (6284)"
+					class="form-control" value="#{erpAppBean.erpapp.logo}"></p:inputText>
+			</div>
+			<div class="form-group">
+				<p:outputLabel class="control-label">Type :</p:outputLabel>
+				<p:inputText type="text" placeholder="Design, Web etc."
+					class="form-control" value="#{erpAppBean.erpapp.type}"></p:inputText>
+			</div>
+			  
+				<h:commandButton  class="btn green"
+					action="#{erpAppBean.doConfigERP()}"  value=" Save Changes "></h:commandButton>
+				 
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

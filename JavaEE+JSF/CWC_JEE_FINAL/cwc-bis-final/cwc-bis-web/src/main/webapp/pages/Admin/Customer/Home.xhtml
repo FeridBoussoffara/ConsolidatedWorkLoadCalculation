@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1 rendered="#{customerBean.formList}">Customers'Home</h1>
+		<h:form>
+			<h:commandButton value="New Customer"
+				action="AddCustomer?faces-redirect=true"></h:commandButton>
+			<h:commandButton value="Our Active Customers"
+				action="UpdateActiveCustomers?faces-redirect=true"></h:commandButton>
+<h:commandButton value="Show All OrderSales"
+			 action="#{customerBean.showAllOrders}"></h:commandButton>
+
+		</h:form>
+		<h:form id="form" rendered="#{customerBean.formList}">
+			<p:dataTable emptyMessage="No Customers" paginator="true"
+				paginatorPosition="bottom" rows="4"
+				value="#{customerBean.customers}" var="p">
+				<f:facet name="header">
+					<h:outputText value="List Of  Customers" />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{p.customerId}" />
+				</p:column>
+				<p:column headerText="Name">
+					<h:outputText value="#{p.name}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{p.email}" />
+				</p:column>
+				<p:column headerText="Phone Number">
+					<h:outputText value="#{p.phoneNumber}" />
+				</p:column>
+				<p:column headerText="Photo">
+					<h:outputText value="#{p.photo}" />
+				</p:column>
+				<p:column headerText="City">
+					<h:outputText value="#{p.city}" />
+				</p:column>
+				<p:column headerText="State">
+					<h:outputText value="#{p.state}" />
+				</p:column>
+				<p:column headerText="Contry">
+					<h:outputText value="#{p.contry}" />
+				</p:column>
+				<p:column headerText="Type">
+					<h:outputText value="#{p.type}" />
+				</p:column>
+				<p:column headerText="action">
+					<h:commandButton value="Delete"
+						action="#{customerBean.doDeleteCustomer(p)}" update=":customers" />
+					<h:commandButton value="Edit"
+						action="#{customerBean.selectEditCustomer(p)}" />
+					<h:commandButton value="Details"
+						action="#{customerBean.selectDetailsCustomer(p)}" />
+					<h:commandButton value="Sales"
+						action="#{customerBean.showODCustomer(p)}" />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+		<h:form id="editCustomer" rendered="#{customerBean.formEdit}"
+			enctype="multipart/form-data">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="name" />
+				<p:inputText value="#{customerBean.customerSelected.name}" />
+				<p:outputLabel value="Email" />
+				<p:inputText value="#{customerBean.customerSelected.email}" />
+				<p:outputLabel value="Phone Number" />
+				<p:inputText value="#{customerBean.customerSelected.phoneNumber}" />
+				<p:outputLabel value="City" />
+				<p:inputText value="#{customerBean.customerSelected.city}" />
+				<p:outputLabel value="Contry" />
+				<p:inputText value="#{customerBean.customerSelected.contry}" />
+				<p:outputLabel value="State" />
+				<p:inputText value="#{customerBean.customerSelected.state}" />
+				<p:fileUpload value="#{customerBean.uploadedFile}" mode="simple"
+					skinSimple="true" />
+				<h:commandButton action="#{customerBean.doAddOrSaveCustomerEdit()}"
+					value=" Update Customer" />
+				<h:commandButton action="#{customerBean.goHome()}"
+					value=" Back to Home " />
+
+			</p:panelGrid>
+		</h:form>
+
+		<h:form id="detailCustomer" rendered="#{customerBean.formDetails}">
+
+			<p:panelGrid columns="2">
+			</p:panelGrid>
+			<p:outputLabel value="Name :  " />
+			<p:outputLabel value="#{customerBean.customerSelected.name}" />
+			<br />
+			<p:outputLabel value="Email :  " />
+			<p:outputLabel value="#{customerBean.customerSelected.email}" />
+			<br />
+			<p:outputLabel value="Phone Number :  " />
+			<p:outputLabel value="#{customerBean.customerSelected.phoneNumber}" />
+			<br />
+			<p:outputLabel value="City :  " />
+			<p:outputLabel value="#{customerBean.customerSelected.city}" />
+			<br />
+			<p:outputLabel value="Contry :  " />
+			<p:outputLabel value="#{customerBean.customerSelected.contry}" />
+			<br />
+			<p:outputLabel value="State :  " />
+			<p:outputLabel value="#{customerBean.customerSelected.state}" />
+			<br />
+
+			<h:graphicImage
+				value="http://localhost:18080/img/#{customerBean.customerSelected.photo}" />
+			<br />
+			<br />
+			<h:commandButton value="Buy Product"
+				action="#{customerBean.selectListProduct(customerBean.customerSelected)}"></h:commandButton>
+
+			<h:commandButton action="#{customerBean.goHome()}"
+				value=" Back to Home " />
+		</h:form>
+
+
+
+		<h:form id="formProduct" rendered="#{customerBean.formProduct}">
+			<h:commandButton value="Home" action="#{customerBean.goHome()}"
+				rendered="#{customerBean.formProduct}">
+			</h:commandButton>
+			<p:dataTable emptyMessage="No Products" paginator="true"
+				paginatorPosition="bottom" rows="4" value="#{customerBean.products}"
+				var="p">
+				<f:facet name="header">
+					<h:outputText value="List Of  Products" />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{p.productId}" />
+				</p:column>
+				<p:column headerText="Name">
+					<h:outputText value="#{p.name}" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="#{p.quantity}" />
+				</p:column>
+				<p:column headerText="Photo">
+					<h:outputText value="#{p.photo}" />
+				</p:column>
+				<p:column headerText="Added Date">
+					<h:outputText value="#{p.addedDate}" />
+				</p:column>
+				<p:column headerText="Type">
+					<h:outputText value="#{p.type}" />
+				</p:column>
+
+				<p:column headerText="action">
+
+
+					<h:commandButton value="Buy this product"
+						action="#{customerBean.selectBuyProduct(customerBean.customerSelected,p)}" />
+
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<h:form id="BuyPrd" rendered="#{customerBean.formBuyProduct}">
+			<p:growl id="msg" />
+			<h1>Customer : #{customerBean.customerSelected.name} would buy
+				product : #{customerBean.product.name}</h1>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Quantity" />
+				<p:inputText    value="#{customerBean.ordersale.quantity}"></p:inputText>
+
+				<p:outputLabel for="multi" value="Date Order:" />
+				<p:calendar id="multi" value="#{customerBean.ordersale.dateOrder}"
+					pages="3" />
+
+
+
+				<h:outputText value="Buy now or Not ? " />
+				<p:selectBooleanCheckbox value="#{customerBean.value}">
+					<p:ajax update="msg" listener="#{customerBean.addMessage}" />
+				</p:selectBooleanCheckbox>
+
+			</p:panelGrid>
+
+			<p:commandButton value="Submit" icon="ui-icon-check"
+				action="#{customerBean.doBuyProduct(customerBean.customerSelected,customerBean.product)}" />
+
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

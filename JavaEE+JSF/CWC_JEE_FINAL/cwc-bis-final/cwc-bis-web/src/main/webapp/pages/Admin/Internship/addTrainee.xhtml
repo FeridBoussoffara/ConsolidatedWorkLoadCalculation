@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		
+		<h1>Add Trainee</h1>
+		<hr />
+		
+		<h:form id="addtrainee" >
+			<h:panelGrid columns="3">
+
+				
+                <h:outputText value="First Name" />
+				<h:inputText id="firstname"
+					value="#{internshipBean.trainetoadd.firstName}" required="true"
+					requiredMessage="Champ obligatoire">
+					<f:ajax event="blur" render="mfirstname"></f:ajax>
+				</h:inputText>
+				<h:message for="firstname" id="mfirstname" />
+				<h:outputText value="Last Name" />
+				<h:inputText id="lastname"
+					value="#{internshipBean.trainetoadd.lastName}" required="true"
+					requiredMessage="Champ obligatoire">
+					<f:ajax event="blur" render="mlastname"></f:ajax>
+				</h:inputText>
+				<h:message for="lastname" id="mlastname" />
+				
+				<h:outputText value="CIN" />
+				<h:inputText id="cin"
+					value="#{internshipBean.trainetoadd.CIN}" required="true"
+					requiredMessage="Champ obligatoire">
+					<f:ajax event="blur" render="mcin"></f:ajax>
+				</h:inputText>
+				<h:message for="cin" id="mcin" />
+				
+				<h:outputText value="Adresse" />
+				<h:inputText id="adresse"
+					value="#{internshipBean.trainetoadd.adresse}" required="true"
+					requiredMessage="Champ obligatoire">
+					<f:ajax event="blur" render="madresses"></f:ajax>
+				</h:inputText>
+				<h:message for="adresse" id="madresse" />
+				
+				<h:outputText value="Email" />
+				<h:inputText id="email"
+					value="#{internshipBean.trainetoadd.email}" required="true"
+					requiredMessage="Champ obligatoire">
+					<f:ajax event="blur" render="memail"></f:ajax>
+				</h:inputText>
+				<h:message for="email" id="memail" />
+				
+			</h:panelGrid>
+
+			<h:commandButton value="Add"
+				action="#{internshipBean.doAddTrainee()}" />
+			
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

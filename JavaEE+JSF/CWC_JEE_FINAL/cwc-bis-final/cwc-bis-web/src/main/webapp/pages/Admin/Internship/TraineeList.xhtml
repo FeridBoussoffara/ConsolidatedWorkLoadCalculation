@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>List of Trainees</h1>
+			
+		<h:form id="traineeslist">	
+			<p:dataTable emptyMessage="No Trainees" paginator="true"
+				paginatorPosition="bottom" rows="4" value="#{internshipBean.trainees}"
+				var="t">
+				<f:facet name="header">
+					<h:outputText value="List Of Trainees" />
+				</f:facet>
+				<p:column headerText="Firs Name">
+					<h:outputText value="#{t.firstName}" />
+				</p:column>
+				<p:column headerText="Last Bame">
+					<h:outputText value="#{t.lastName}" />
+				</p:column>
+				<p:column headerText="CIN">
+					<h:outputText value="#{t.CIN}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{t.email}" />
+				</p:column>
+				<p:column headerText="Adresse">
+					<h:outputText value="#{t.adresse}" />
+				</p:column>
+				<p:column headerText="AddEmp">
+					<h:commandButton value="Add As Employee"
+				action="#{internshipBean.AddAsEmployee(t)}"  update=":trainees" />
+				</p:column>
+				
+				</p:dataTable>
+				<h:commandButton value="Return To List Of Internships"
+				action="#{internshipBean.ReturnList()}" />
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

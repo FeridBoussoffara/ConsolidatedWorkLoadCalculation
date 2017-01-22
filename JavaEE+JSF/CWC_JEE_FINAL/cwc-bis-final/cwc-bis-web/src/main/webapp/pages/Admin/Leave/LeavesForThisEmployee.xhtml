@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>Leaves For This #{leaveBean.selectedEmployee.firstName}</h1>
+		<hr />
+		<h:form id="leaves">
+			<p:dataTable emptyMessage="No Leaves" paginator="true"
+				paginatorPosition="bottom" rows="4" value="#{leaveBean.leaves}"
+				var="l">
+				<f:facet name="header">
+					<h:outputText value="list of Leaves For This Employee" />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{l.leaveId}" />
+				</p:column>
+				<p:column headerText="Category">
+					<h:outputText value="#{l.category}" />
+				</p:column>
+				
+				<p:column headerText="Start Date">
+					<h:outputText value="#{l.startDate}" />
+				</p:column>
+				<p:column headerText="End Date">
+					<h:outputText value="#{l.endDate}" />
+				</p:column>
+				
+			</p:dataTable>
+			<h:commandButton value="List"
+				action="#{leaveBean.ReturnListLeave()}" />
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

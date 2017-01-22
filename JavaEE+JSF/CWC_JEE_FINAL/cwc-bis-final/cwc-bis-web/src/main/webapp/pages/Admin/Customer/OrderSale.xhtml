@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Orde Sales</ui:define>
+	<ui:define name="content">
+
+		
+
+		<h:form id="formOrderCus"
+			rendered="#{customerBean.formOrdersCustomer}">
+			<p:dataTable emptyMessage="No OrderSales" paginator="true"
+				paginatorPosition="bottom" rows="4"
+				value="#{customerBean.ordersales}" var="p">
+				<f:facet name="header">
+					<h:outputText
+						value="List Of   OrdeSales for  #{customerBean.customerSelected.name} " />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{p.id}" />
+				</p:column>
+				<p:column headerText="Customer">
+					<h:outputText value="#{p.customer.name}" />
+				</p:column>
+				<p:column headerText="Product">
+					<h:outputText value="#{p.product.name}" />
+				</p:column>
+				<p:column headerText="Date sale">
+					<h:outputText value="#{p.dateSale}" />
+				</p:column>
+				<p:column headerText="Date Order">
+					<h:outputText value="#{p.dateOrder}" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="#{p.quantity}" />
+				</p:column>
+				<p:column headerText="Edit">
+					<h:commandButton value="Select"
+						action="#{customerBean.selectEditOrder(p)}" />
+				</p:column>
+
+			</p:dataTable>
+			<p:commandLink value="GO back to HomeCustomer "
+				action="Home?faces-redirect=true"></p:commandLink>
+		</h:form>
+		<h:form id="BuyPrd" rendered="#{customerBean.formBuyProduct}">
+
+			<h1>Customer : #{customerBean.customerSelected.name} would buy
+				product : #{customerBean.product.name}</h1>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Quantity" />
+				<p:inputText value="#{customerBean.ordersaleSelected.quantity}"></p:inputText>
+
+				<p:outputLabel for="multi" value="Date Order:" />
+				<p:calendar id="multi"
+					value="#{customerBean.ordersaleSelected.dateOrder}" pages="3" />
+
+
+
+				<h:outputText value="Buy now or Not ? " />
+				<p:selectBooleanCheckbox value="#{customerBean.value}">
+				</p:selectBooleanCheckbox>
+
+			</p:panelGrid>
+
+			<p:commandButton value="Submit" icon="ui-icon-check"
+				action="#{customerBean.EditOrderSale(customerBean.ordersaleSelected)}" />
+
+
+		</h:form>
+
+		<h:form id="formAllOrder" rendered="#{customerBean.formAllOrder}">
+			<p:dataTable emptyMessage="No OrderSales" paginator="true"
+				paginatorPosition="bottom" rows="4"
+				value="#{customerBean.allOrdersales}" var="p">
+				<f:facet name="header">
+					<h:outputText value="List Of  All  OrdeSales  " />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{p.id}" />
+				</p:column>
+				<p:column headerText="Customer">
+					<h:outputText value="#{p.customer.name}" />
+				</p:column>
+				<p:column headerText="Product">
+					<h:outputText value="#{p.product.name}" />
+				</p:column>
+				<p:column headerText="Date sale">
+					<h:outputText value="#{p.dateSale}" />
+				</p:column>
+				<p:column headerText="Date Order">
+					<h:outputText value="#{p.dateOrder}" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="#{p.quantity}" />
+				</p:column>
+
+			</p:dataTable>
+			<p:commandLink value="GO back to HomeCustomer "
+				action="Home?faces-redirect=true"></p:commandLink>
+		</h:form>
+
+<h:form  >
+
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="multi" value="Enter a date:" />
+				<p:calendar id="multi" value="#{orderSaleBean.getteddate}" pages="3" />
+
+			</h:panelGrid>
+
+			<p:commandButton value="Submit"
+				actionListener="#{orderSaleBean.click()}" icon="ui-icon-check" />
+			<p:dialog modal="true" resizable="false" header="Values"
+				widgetVar="dlg" showEffect="fold">
+				<p:panelGrid id="display" columns="2" columnClasses="label,value">
+					<h:outputText value="Multiple:" />
+					<h:outputText value="#{orderSaleBean.getteddate}">
+						<f:convertDateTime pattern="MM/dd/yyyy" />
+					</h:outputText>
+				</p:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

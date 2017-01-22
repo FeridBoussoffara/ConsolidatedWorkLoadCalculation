@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title"></ui:define>
+	<ui:define name="content">
+		<h1>List PaySlips</h1>
+		<hr />
+		<h:form id="payslips" >
+			<p:dataTable emptyMessage="No PaySlip" paginator="true"
+				paginatorPosition="bottom" rows="4" value="#{StatPaySlipEmp.payslips}"
+				var="p">
+				<f:facet name="header">
+					<h:outputText value="liste PaySlip" />
+				</f:facet>
+				<p:column headerText="#">
+					<h:outputText value="#{p.paySlipId}" />
+				</p:column>
+				<p:column headerText="Prime">
+					<h:outputText value="#{p.prime}" />
+				</p:column>
+				<p:column headerText="GrossPay">
+					<h:outputText value="#{p.grossPay}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

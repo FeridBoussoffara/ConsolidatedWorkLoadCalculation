@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="cwc-bis-ejb">
+	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/pi</jta-data-source>
+		<class>tn.esprit.bi.cwc.persistance.Activity</class>
+		<class>tn.esprit.bi.cwc.persistance.Agriculture</class>
+		<class>tn.esprit.bi.cwc.persistance.Aspnetrole</class>
+		<class>tn.esprit.bi.cwc.persistance.Aspnetuser</class>
+		<class>tn.esprit.bi.cwc.persistance.Aspnetuserclaim</class>
+		<class>tn.esprit.bi.cwc.persistance.Aspnetuserlogin</class>
+		<class>tn.esprit.bi.cwc.persistance.AspnetuserloginPK</class>
+		<class>tn.esprit.bi.cwc.persistance.Assignement</class>
+		<class>tn.esprit.bi.cwc.persistance.Attendance</class>
+		<class>tn.esprit.bi.cwc.persistance.Customer</class>
+		<class>tn.esprit.bi.cwc.persistance.Electronic</class>
+		<class>tn.esprit.bi.cwc.persistance.Erpapp</class>
+		<class>tn.esprit.bi.cwc.persistance.Furniture</class>
+		<class>tn.esprit.bi.cwc.persistance.Historyrow</class>
+		<class>tn.esprit.bi.cwc.persistance.Internship</class>
+		<class>tn.esprit.bi.cwc.persistance.Leave</class>
+		<class>tn.esprit.bi.cwc.persistance.Orderpurchas</class>
+		<class>tn.esprit.bi.cwc.persistance.OrderpurchasPK</class>
+		<class>tn.esprit.bi.cwc.persistance.Ordersale</class>
+		<class>tn.esprit.bi.cwc.persistance.OrdersalePK</class>
+		<class>tn.esprit.bi.cwc.persistance.Payslip</class>
+		<class>tn.esprit.bi.cwc.persistance.Product</class>
+		<class>tn.esprit.bi.cwc.persistance.Project</class>
+		<class>tn.esprit.bi.cwc.persistance.Provider</class>
+		<class>tn.esprit.bi.cwc.persistance.Rating</class>
+		<class>tn.esprit.bi.cwc.persistance.Ratingactivity</class>
+		<class>tn.esprit.bi.cwc.persistance.RatingactivityPK</class>
+		<class>tn.esprit.bi.cwc.persistance.Reward</class>
+		<class>tn.esprit.bi.cwc.persistance.Software</class>
+		<class>tn.esprit.bi.cwc.persistance.Task</class>
+		<class>tn.esprit.bi.cwc.persistance.Trainee</class>
+		<class>tn.esprit.bi.cwc.persistance.Vehicule</class>
+		
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+<p:chart type="bar" model="#{internshipBean.barchart}" style="width:400px;" widgetVar="chart" />
+<p:commandButton type="button" value="Extend" icon="ui-icon-extlink" onclick="exportChart()"/>
+ 
+<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Trainee/Number Of Interships" resizable="false">
+    <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
+</p:dialog>
+ 
+<script type="text/javascript">
+function exportChart() {
+    //export image
+    $('#output').empty().append(PF('chart').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg').show();
+}
+</script>
+<h:commandButton value="Return To List Of Internships"
+				action="#{internshipBean.ReturnList()}" />
+</body> 
+</html>
